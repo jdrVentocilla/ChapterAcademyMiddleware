@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <Reference Include="Core">
-      <HintPath>..\..\Core\bin\Debug\net7.0\Core.dll</HintPath>
+      <HintPath>..\Librerias\Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 

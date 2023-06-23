@@ -2,11 +2,11 @@
 {
     public class Aplicacion
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 
-        public Aplicacion(Guid id, string nombre, string descripcion)
+        public Aplicacion(string id, string nombre, string descripcion)
         {
             Id = id;
             Nombre = nombre;

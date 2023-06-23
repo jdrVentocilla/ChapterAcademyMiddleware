@@ -9,14 +9,14 @@ namespace UserITApp.Entities
     public class Usuario
     {
         
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Nombre { get; set; }
 
         public string Login { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
 
-        public Usuario(Guid id, string nombre, string login, string password, string email)
+        public Usuario(string id, string nombre, string login, string password, string email)
         {
             Id = id;
             Nombre = nombre;

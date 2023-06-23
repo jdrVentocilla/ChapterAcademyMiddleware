@@ -13,15 +13,12 @@ namespace UserITApp.Services
     public class UsuarioService
     {
         private  UserITAppContext _context;
-        public UsuarioService() {
-
-
+        public UsuarioService(UserITAppContext context) {
+            _context = context;
         }
         public StateExecution Upsert(Usuario entidad)
         {
-            using (_context = new UserITAppContext())
-
-            {
+            
                 Usuario entiodadEncontrada = this._context.Usuario.Find(entidad.Id);
 
                 if (entiodadEncontrada == null)
@@ -44,14 +41,13 @@ namespace UserITApp.Services
 
 
                 });
-            }
+            
           
         }
 
         public StateExecution Delete(string id)
         {
-            using (_context = new UserITAppContext())
-            {
+           
 
                 Usuario entidad = this._context.Usuario.Find(id);
 
@@ -79,14 +75,14 @@ namespace UserITApp.Services
 
                 };
 
-            }
+            
            
         }
 
         public StateExecution Upsert(Aplicacion entidad)
 
         {
-            using (_context = new UserITAppContext()) {
+           
 
                 Aplicacion entiodadEncontrada = this._context.Aplicacion.Find(entidad.Id);
 
@@ -111,56 +107,49 @@ namespace UserITApp.Services
 
                 });
 
-            }
+            
             
             
           
         }
 
-        public StateExecution<Aplicacion> Find(Aplicacion entidad)
+        public StateExecution<Usuario> Find(string id)
         {
-            using (_context = new UserITAppContext())
-            {
-                Aplicacion entidadEncontrada = this._context.Aplicacion.Find(entidad.Id);
+
+            Usuario entidadEncontrada = this._context.Usuario.Find(id);
 
 
-                return (new StateExecution<Aplicacion>()
+                return (new StateExecution<Usuario>()
                 {
 
                     Status = entidadEncontrada != null,
                     StateType = entidadEncontrada != null ? State.Ok : State.ErrorNotContent,
                     Data = entidadEncontrada,
-                    MessageState = new Message() { Description = entidadEncontrada == null ? "Registro encontrado." : "Registro no encontrado." },
+                    MessageState = new Message() { Description = entidadEncontrada == null ? "Registro no encontrado." : "Registro encontrado." },
 
 
                 });
-            }
+            
             
 
         }
 
-        public StateExecution<IEnumerable<Aplicacion>> Get()
+        public StateExecution<IEnumerable<Usuario>> Get()
         {
-            using (_context = new UserITAppContext())
-            {
-                IEnumerable<Aplicacion> listaEntidad = this._context.Aplicacion.AsEnumerable<Aplicacion>();
+           
+                IEnumerable<Usuario> listaEntidad = this._context.Usuario.AsEnumerable<Usuario>();
 
 
-                return (new StateExecution<IEnumerable<Aplicacion>>()
+                return (new StateExecution<IEnumerable<Usuario>>()
                 {
 
                     Status = true,
                     StateType = State.Ok,
                     Data = listaEntidad,
-                    MessageState = new Message() { Description = "Registro encontrado." },
+                    MessageState = new Message() { Description = "Consulta realizada con éxito." },
 
 
                 });
-
-
-
-            }
-
 
         }
 

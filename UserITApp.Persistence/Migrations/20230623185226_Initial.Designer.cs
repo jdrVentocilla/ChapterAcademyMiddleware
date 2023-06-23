@@ -11,7 +11,7 @@ using UserITApp.Persistence;
 namespace UserITApp.Persistence.Migrations
 {
     [DbContext(typeof(UserITAppContext))]
-    [Migration("20230622234122_Initial")]
+    [Migration("20230623185226_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -24,9 +24,8 @@ namespace UserITApp.Persistence.Migrations
 
             modelBuilder.Entity("UserITApp.Entities.Aplicacion", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
@@ -47,11 +46,12 @@ namespace UserITApp.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("AplicacionId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("AplicacionId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -64,9 +64,8 @@ namespace UserITApp.Persistence.Migrations
 
             modelBuilder.Entity("UserITApp.Entities.Usuario", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -99,9 +98,7 @@ namespace UserITApp.Persistence.Migrations
 
                     b.HasOne("UserITApp.Entities.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsuarioId");
 
                     b.Navigation("Aplicacion");
 

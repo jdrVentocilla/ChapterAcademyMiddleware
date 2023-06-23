@@ -18,16 +18,14 @@ namespace UserITApp.Persistence
         public DbSet<AplicacionUsuario> AplicacionUsuario => Set<AplicacionUsuario>();
 
 
-        public UserITAppContext() : base ()
+        public UserITAppContext(DbContextOptions options) : base (options)
         {
-           DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
-           base.OnConfiguring(optionsBuilder);
-
+           
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
 
-            optionsBuilder.UseMySql("Server=64.227.8.152; Database=useritapp; Uid=useritapp; Pwd=#gD09IO1F; CharSet=utf8; Port=3306;", ServerVersion.AutoDetect("Server=64.227.8.152; Database=useritapp; Uid=root; Pwd=p4WKJABEUYIL$; CharSet=utf8; Port=3306;  pooling=true;"));
+           
         }
 
     }
