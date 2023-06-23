@@ -27,7 +27,7 @@ namespace UserITApp.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
 
-            optionsBuilder.UseMySql("Server=64.227.8.152; Database=useritapp; Uid=root; Pwd=p4WKJABEUYIL$; CharSet=utf8; Port=3306;", ServerVersion.AutoDetect("Server=64.227.8.152; Database=useritapp; Uid=root; Pwd=p4WKJABEUYIL$; CharSet=utf8; Port=3306;  pooling=true;"));
+            optionsBuilder.UseMySql("Server=64.227.8.152; Database=useritapp; Uid=useritapp; Pwd=#gD09IO1F; CharSet=utf8; Port=3306;", ServerVersion.AutoDetect("Server=64.227.8.152; Database=useritapp; Uid=root; Pwd=p4WKJABEUYIL$; CharSet=utf8; Port=3306;  pooling=true;"));
         }
 
     }
