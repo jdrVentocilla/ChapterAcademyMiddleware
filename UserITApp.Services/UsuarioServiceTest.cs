@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UserITApp.Entities;
 using UserITApp.Persistence;
+using System.Collections;
 
 namespace UserITApp.Services
 {
-    public class UsuarioService : IServicioGenerico<Usuario>
+    internal class UsuarioServiceTest : IServicioGenerico<Usuario>
     {
         private readonly UserITAppContext _context;
-        public UsuarioService(UserITAppContext context)
+        public UsuarioServiceTest(UserITAppContext context)
         {
             this._context = context;
         }
@@ -130,25 +131,11 @@ namespace UserITApp.Services
 
         public StateExecution<IEnumerable<Usuario>> Get()
         {
-            throw new NotImplementedException("Ocurrio un error al ejecuitar el comando");
 
+            IEnumerable<Usuario> lista = new List<Usuario>();
 
-            //IEnumerable<Usuario> listaEntidad = this._context.Usuario.AsEnumerable<Usuario>();
-
-
-            //return (new StateExecution<IEnumerable<Usuario>>()
-            //{
-
-            //    Status = true,
-            //    StateType = State.Ok,
-            //    Data = listaEntidad,
-            //    MessageState = new Message() { Description = "Consulta realizada con éxito." },
-
-
-            //});
-
-
+            return  new StateExecution<IEnumerable<Usuario>>() {  Status =  true , Data = lista };
+             
         }
-
     }
 }
