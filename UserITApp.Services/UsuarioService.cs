@@ -13,12 +13,13 @@ namespace UserITApp.Services
     public class UsuarioService
     {
         private  UserITAppContext _context;
-        public UsuarioService(UserITAppContext context) {
-            _context = context;
+        public UsuarioService() {
+            
         }
         public StateExecution Upsert(Usuario entidad)
         {
-            
+            using (_context = new UserITAppContext())
+            {
                 Usuario entiodadEncontrada = this._context.Usuario.Find(entidad.Id);
 
                 if (entiodadEncontrada == null)
@@ -41,14 +42,16 @@ namespace UserITApp.Services
 
 
                 });
+            }
+                
             
           
         }
 
         public StateExecution Delete(string id)
         {
-           
-
+            using (_context = new UserITAppContext())
+            {
                 Usuario entidad = this._context.Usuario.Find(id);
 
                 if (entidad == null)
@@ -75,15 +78,20 @@ namespace UserITApp.Services
 
                 };
 
-            
-           
+
+            }
+
+
+
+
+
         }
 
         public StateExecution Upsert(Aplicacion entidad)
 
         {
-           
-
+            using ( _context = new UserITAppContext())
+            {
                 Aplicacion entiodadEncontrada = this._context.Aplicacion.Find(entidad.Id);
 
                 if (entiodadEncontrada == null)
@@ -106,6 +114,9 @@ namespace UserITApp.Services
 
 
                 });
+            }
+
+               
 
             
             
@@ -115,8 +126,10 @@ namespace UserITApp.Services
 
         public StateExecution<Usuario> Find(string id)
         {
+            using (_context = new UserITAppContext())
+            {
 
-            Usuario entidadEncontrada = this._context.Usuario.Find(id);
+                Usuario entidadEncontrada = this._context.Usuario.Find(id);
 
 
                 return (new StateExecution<Usuario>()
@@ -129,6 +142,8 @@ namespace UserITApp.Services
 
 
                 });
+            }
+          
             
             
 
@@ -136,7 +151,8 @@ namespace UserITApp.Services
 
         public StateExecution<IEnumerable<Usuario>> Get()
         {
-           
+            using (_context = new UserITAppContext())
+            {
                 IEnumerable<Usuario> listaEntidad = this._context.Usuario.AsEnumerable<Usuario>();
 
 
@@ -150,6 +166,8 @@ namespace UserITApp.Services
 
 
                 });
+            }
+               
 
         }
 

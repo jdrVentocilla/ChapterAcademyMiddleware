@@ -1,33 +1,27 @@
 ﻿using Core.GestionDeExcepciones;
 using Core;
-using Core.InfraestructuraEF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserITApp.Entities;
-using UserITApp.Persistence.Repositories;
 using UserITApp.Persistence;
-using System.Threading;
+
 
 namespace UserITApp.Services
 {
     public class AplicacionService
     {
         
-        private  readonly UserITAppContext _context;
-        public AplicacionService(UserITAppContext userITAppContext)
+        private  UserITAppContext _context;
+        public AplicacionService()
         {
-            _context = userITAppContext;  
+            
         }
 
         
 
         public StateExecution Delete(string id)
         {
-
-            Aplicacion entidad = this._context.Aplicacion.Find(id);
+            using (_context = new UserITAppContext())
+            {
+                Aplicacion entidad = this._context.Aplicacion.Find(id);
 
                 if (entidad == null)
                 {
@@ -52,6 +46,8 @@ namespace UserITApp.Services
                     MessageState = new Message() { Description = "Registro eliminado con éxito." },
 
                 };
+            }
+          
 
             
 
@@ -60,7 +56,8 @@ namespace UserITApp.Services
 
         public StateExecution Upsert(Aplicacion entidad)
         {
-           
+            using ( _context = new UserITAppContext())
+            {
                 Aplicacion entiodadEncontrada = this._context.Aplicacion.Find(entidad.Id);
 
                 if (entiodadEncontrada == null)
@@ -83,12 +80,18 @@ namespace UserITApp.Services
 
 
                 });
+            }
+                
                       
         }
 
         public StateExecution<Aplicacion> Find(Aplicacion entidad)
         {
-           
+            using ( _context = new UserITAppContext())
+            {
+
+
+
                 Aplicacion entidadEncontrada = this._context.Aplicacion.Find(entidad.Id);
 
 
@@ -102,6 +105,8 @@ namespace UserITApp.Services
 
 
                 });
+            }
+
                   
 
            
@@ -110,7 +115,10 @@ namespace UserITApp.Services
 
         public StateExecution<IEnumerable<Aplicacion>> Get() {
 
-               IEnumerable<Aplicacion> listaEntidad = this._context.Aplicacion.AsEnumerable<Aplicacion>();
+
+            using ( _context = new UserITAppContext())
+            {
+                IEnumerable<Aplicacion> listaEntidad = this._context.Aplicacion.AsEnumerable<Aplicacion>();
 
 
                 return (new StateExecution<IEnumerable<Aplicacion>>()
@@ -123,7 +131,7 @@ namespace UserITApp.Services
 
 
                 });
-                      
+            }
 
 
         }
